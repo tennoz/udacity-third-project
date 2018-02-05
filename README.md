@@ -27,8 +27,11 @@ to configure the VM
 `create view err_req as select count(*) as count, date(time) as date from log where status <> '200 OK' group by date order by count desc;`
 
 `create view err_prc as select total_req.date, round((100.0*err_req.count)/total_req.count, 2) as percent from err_req join total_req on err_req.date = total_req.date;`
+
 11. Exit psql `ctrl + d`
+
 12. Download `logs_analysis.py` from this repo.
+
 13. Run the application `python logs_analysis.py`
 
 ## Expected output
@@ -40,6 +43,7 @@ Top three articles:
 
 "Bad things gone, say good people" -- 170098 views
 
+
 Top authors:
 
 "Ursula La Multa" -- 507594 views
@@ -49,6 +53,7 @@ Top authors:
 "Anonymous Contributor" -- 170098 views
 
 "Markoff Chaney" -- 84557 views
+
 
 Days with errors > 1%
 
