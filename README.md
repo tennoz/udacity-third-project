@@ -18,7 +18,7 @@ to configure the VM
 5. Open your terminal and change directory to the vagrant folder we downloaded.
 6. Run `vagrant up`
 7. Run `vagrant ssh`
-8. Load the data `psql -d news -f newsdata.sql
+8. Load the data `psql -d news -f newsdata.sql`
 9. Open postgresql `psql -d news`
 10. Run the following queries:
 
