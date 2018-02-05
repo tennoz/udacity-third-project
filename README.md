@@ -29,17 +29,16 @@ to configure the VM
 13. Run the application `python logs_analysis.py`
 
 ## Expected output
-`Top three articles:`
-`"Candidate is jerk, alleges rival" -- 338647 views`
-`"Bears love berries, alleges bear" -- 253801 views`
-`"Bad things gone, say good people" -- 170098 views`
+Top three articles:
+"Candidate is jerk, alleges rival" -- 338647 views
+"Bears love berries, alleges bear" -- 253801 views
+"Bad things gone, say good people" -- 170098 views
 
-`Top authors: `
-`"Ursula La Multa" -- 507594 views`
-`"Rudolf von Treppenwitz" -- 423457 views`
-`"Anonymous Contributor" -- 170098 views`
-`"Markoff Chaney" -- 84557 views`
+Top authors: 
+"Ursula La Multa" -- 507594 views
+"Rudolf von Treppenwitz" -- 423457 views
+"Anonymous Contributor" -- 170098 views
+"Markoff Chaney" -- 84557 views
 
-`Days with errors > 1%`
-`Jul 17, 2016 -- 2.26% errors`
-# logs_analysis
+Days with errors > 1%
+Jul 17, 2016 -- 2.26% errors
