@@ -21,24 +21,24 @@ to configure the VM
 8. Load the data `psql -d news -f newsdata.sql
 9. Open postgresql `psql -d news`
 10. Run the following queries:
-`create view total_req as select count(*) as count, date(time) as date from log group by date order by count desc;`
-`create view err_req as select count(*) as count, date(time) as date from log where status <> '200 OK' group by date order by count desc;`
-`create view err_prc as select total_req.date, round((100.0*err_req.count)/total_req.count, 2) as percent from err_req join total_req on err_req.date = total_req.date;`
+`create view total_req as select count(*) as count, date(time) as date from log group by date order by count desc;`\s \s
+`create view err_req as select count(*) as count, date(time) as date from log where status <> '200 OK' group by date order by count desc;` \s \s
+`create view err_prc as select total_req.date, round((100.0*err_req.count)/total_req.count, 2) as percent from err_req join total_req on err_req.date = total_req.date;`\s \s
 11. Exit psql `ctrl + d`
 12. Download `logs_analysis.py` from this repo.
 13. Run the application `python logs_analysis.py`
 
 ## Expected output
-Top three articles:
-"Candidate is jerk, alleges rival" -- 338647 views
-"Bears love berries, alleges bear" -- 253801 views
-"Bad things gone, say good people" -- 170098 views
+Top three articles: \s \s
+"Candidate is jerk, alleges rival" -- 338647 views \s \s
+"Bears love berries, alleges bear" -- 253801 views \s \s
+"Bad things gone, say good people" -- 170098 views \s \s
 
-Top authors: 
-"Ursula La Multa" -- 507594 views
-"Rudolf von Treppenwitz" -- 423457 views
-"Anonymous Contributor" -- 170098 views
-"Markoff Chaney" -- 84557 views
+Top authors: \s \s
+"Ursula La Multa" -- 507594 views \s \s
+"Rudolf von Treppenwitz" -- 423457 views \s \s
+"Anonymous Contributor" -- 170098 views \s \s
+"Markoff Chaney" -- 84557 views \s \s
 
-Days with errors > 1%
+Days with errors > 1% \s \s 
 Jul 17, 2016 -- 2.26% errors
