@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import psycopg2
 DBNAME = "news"
 
@@ -5,12 +7,16 @@ DBNAME = "news"
 def execute_query(query):
     """Connects to the database, runs the query passed to it,
     and returns the results"""
-    db = psycopg2.connect(dbname=DBNAME)
-    c = db.cursor()
-    c.execute(query)
-    rows = c.fetchall()
-    db.close()
-    return rows
+    
+    try:
+        db = psycopg2.connect(database=DBNAME)
+        c = db.cursor()
+        c.execute(query)
+        rows = c.fetchall()
+        db.close()
+        return rows
+    except:
+        print("Connection to database failed!")
 
 
 def top_articles():
@@ -71,6 +77,8 @@ def errors():
         print(i[0] + ' -- ' + str(i[1]) + '%' + ' errors')
 
 
-top_articles()
-top_authors()
-errors()
+if __name__ == "__main__":
+    top_articles()
+    top_authors()
+    errors()
+# to make sure that the code is only run when the program is executed directly, not when imported as a module.

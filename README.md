@@ -19,20 +19,10 @@ to configure the VM
 6. Run `vagrant up`
 7. Run `vagrant ssh`
 8. Load the data `psql -d news -f newsdata.sql`
-9. Open postgresql `psql -d news`
-10. Run the following queries:
-
-`create view total_req as select count(*) as count, date(time) as date from log group by date order by count desc;`
-
-`create view err_req as select count(*) as count, date(time) as date from log where status <> '200 OK' group by date order by count desc;`
-
-`create view err_prc as select total_req.date, round((100.0*err_req.count)/total_req.count, 2) as percent from err_req join total_req on err_req.date = total_req.date;`
-
-11. Exit psql `ctrl + d`
-
-12. Download `logs_analysis.py` from this repo.
-
-13. Run the application `python logs_analysis.py`
+9. Load the views queries `psql -d news -f views.sql`
+10. Open postgresql `psql -d news`
+11. Download `logs_analysis.py` from this repo.
+12. Run the application `python logs_analysis.py`
 
 ## Expected output
 Top three articles:
