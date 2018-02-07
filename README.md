@@ -20,9 +20,8 @@ to configure the VM
 7. Run `vagrant ssh`
 8. Load the data `psql -d news -f newsdata.sql`
 9. Load the views queries `psql -d news -f views.sql`
-10. Open postgresql `psql -d news`
-11. Download `logs_analysis.py` from this repo.
-12. Run the application `python logs_analysis.py`
+10. Download `logs_analysis.py` from this repo.
+11. Run the application `python logs_analysis.py`
 
 ## Expected output
 Top three articles:
