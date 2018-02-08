@@ -7,7 +7,7 @@ DBNAME = "news"
 def execute_query(query):
     """Connects to the database, runs the query passed to it,
     and returns the results"""
-    
+
     try:
         db = psycopg2.connect(database=DBNAME)
         c = db.cursor()
@@ -15,8 +15,8 @@ def execute_query(query):
         rows = c.fetchall()
         db.close()
         return rows
-    except:
-        print("Connection to database failed!")
+    except psycopg2.Error as e:
+        print envexit(1)
 
 
 def top_articles():
@@ -25,7 +25,7 @@ def top_articles():
     query = """
         select articles.title as article, count(*) as views
         from articles join log
-        on log.path ~~ concat('%', articles.slug)
+        on log.path = concat('/article/', articles.slug)
         where log.status = '200 OK'
         group by articles.title
         order by views desc limit 3;
@@ -35,9 +35,8 @@ def top_articles():
 
     print('\nTop three articles:')
     for i in output:
-        print('"' + i[0] + '"' + ' -- ' + str(i[1]) + ' views')
-# turned i[1] into str in order to concatenate
-# where i[0] is title and i[1] is number of views and so on
+        print('"{}" -- {}'.format(i[0], i[1]))
+# i[0] is title and i[1] is number of views
 
 
 def top_authors():
@@ -48,7 +47,7 @@ def top_authors():
         from authors join articles
         on authors.id = articles.author
         join log
-        on log.path ~~ concat('%', articles.slug)
+        on log.path = concat('/article/', articles.slug)
         where log.status = '200 OK'
         group by authors.name
         order by views desc;
@@ -58,14 +57,14 @@ def top_authors():
 
     print('\nTop authors: ')
     for i in output:
-        print('"' + i[0] + '"' + ' -- ' + str(i[1]) + ' views')
+        print('"{}" -- {}'.format(i[0], i[1]))
 
 
 def errors():
     '''Returns days with more than 1% requests lead to error'''
 
     query = """
-        select to_char(date, 'Mon DD, YYYY') as date, percent
+        select to_char(date, 'FMMon FMDD, YYYY') as date, percent
         from err_prc
         where percent > 1.0;
         """
@@ -74,11 +73,12 @@ def errors():
 
     print('\nDays with errors > 1%')
     for i in output:
-        print(i[0] + ' -- ' + str(i[1]) + '%' + ' errors')
+        print('"{}" -- {}% errors'.format(i[0], i[1]))
 
 
 if __name__ == "__main__":
     top_articles()
     top_authors()
     errors()
-# to make sure that the code is only run when the program is executed directly, not when imported as a module.
+# to make sure that the code is only run when the program
+# is executed directly, not when imported as a module.
